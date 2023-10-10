@@ -47,7 +47,7 @@ const sendVerificationEmail = async (email, verificationToken) => {
         from: "amazon.com",
         to: email,
         subject: "Email verification",
-        text: `Please click the following link to verify your email : http://localhost:${port}/verify/${verificationToken}`,
+        text: `Please click the following link to verify your email : https://ezcart-zq3e.onrender.com/verify/${verificationToken}`,
     };
 
     try {
@@ -63,6 +63,8 @@ const generateSecretKey = () => {
 };
 
 const secretKey = generateSecretKey();
+
+app.use("/api/product", ProductRoutes);
 
 app.post("/register", async (req, res) => {
     try {
