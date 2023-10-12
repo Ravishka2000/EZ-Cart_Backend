@@ -258,14 +258,3 @@ app.get("/orders", async (req, res) => {
         res.status(500).json({ error: "Internal Server Error" });
     }
 });
-
-// Route to fetch all orders and render the report
-app.get("/orders/report", async (req, res) => {
-    try {
-        const orders = await Order.find();
-        res.render("report", { orders }); // Render the EJS template with the orders data
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({ error: "Internal Server Error" });
-    }
-});
