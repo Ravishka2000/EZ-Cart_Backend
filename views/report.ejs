@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Order Report</title>
+</head>
+<body>
+  <h1>Order Report</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Order ID</th>
+        <th>User</th>
+        <th>Total Price</th>
+        <th>Shipping Address</th>
+        <th>Payment Method</th>
+        <th>Created At</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% orders.forEach(order => { %>
+        <tr>
+          <td><%= order._id %></td>
+          <td><%= order.user %></td>
+          <td><%= order.totalPrice %></td>
+          <td><%= order.shippingAddress.name %></td>
+          <td><%= order.paymentMethod %></td>
+          <td><%= order.createdAt %></td>
+        </tr>
+      <% }); %>
+    </tbody>
+  </table>
+</body>
+</html>

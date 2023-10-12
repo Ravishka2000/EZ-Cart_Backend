@@ -8,6 +8,7 @@ import jwt from "jsonwebtoken";
 import User from "./models/User.js";
 import Order from "./models/Order.js";
 import ProductRoutes from "./routes/ProductRoutes.js";
+import ejs from "ejs";
 
 const app = express();
 const port = 8000;
@@ -15,6 +16,7 @@ const port = 8000;
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.set('view engine', 'ejs');
 
 mongoose
     .connect(
@@ -244,5 +246,26 @@ app.get("/orders/:userId", async (req, res) => {
         res.status(200).json({ orders });
     } catch (error) {
         res.status(500).json({ message: "Error" });
+    }
+});
+
+app.get("/orders", async (req, res) => {
+    try {
+        const orders = await Order.find(); // Retrieve all orders from the database
+        res.json(orders);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+});
+
+// Route to fetch all orders and render the report
+app.get("/orders/report", async (req, res) => {
+    try {
+        const orders = await Order.find();
+        res.render("report", { orders }); // Render the EJS template with the orders data
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: "Internal Server Error" });
     }
 });
