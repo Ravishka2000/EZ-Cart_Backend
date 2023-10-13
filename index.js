@@ -16,7 +16,7 @@ const port = 8000;
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.set('view engine', 'ejs');
+app.set("view engine", "ejs");
 
 mongoose
     .connect(
@@ -257,4 +257,9 @@ app.get("/orders", async (req, res) => {
         console.error(err);
         res.status(500).json({ error: "Internal Server Error" });
     }
+});
+
+app.get("/users", async (req, res) => {
+    const users = await User.find();
+    res.json(users);
 });
